@@ -31,10 +31,19 @@ std::string pang_saling( const unsigned int numero){
     }
     throw std::out_of_range("Imposible na yan!");
 }
-
+bool is_number(const std::string& s){
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
 int main(){
-        int numero;
+        std::string numero;
+        std::string test;
         std::cout << "Magbigay ng numero:";
         std::cin >>numero;
-        std::cout << numero << " = " << pang_saling(numero) << std::endl;
+        std::string::size_type sz; 
+        if (is_number(numero)){
+            int i = std::stoi (numero,&sz);
+            std::cout << i << " = " << pang_saling(i) << std::endl;
+        }
 }
