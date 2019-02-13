@@ -27,7 +27,12 @@ std::string number_to_words( const unsigned int numero){
     if( numero < 1000000 ) { // thousands
         unsigned int thousands = static_cast<int>(numero/1000);
         unsigned int remainder = numero - (thousands*1000);
-        return number_to_words(thousands) + (0 != remainder ? "g libo't " + number_to_words(remainder) : "g libo");
+        std::string to_concat;
+        if(thousands == 4 || thousands == 6 || thousands == 9)
+            to_concat = " na libo";
+        else
+            to_concat = "ng libo";
+        return number_to_words(thousands) + (0 != remainder ? to_concat+"'t " + number_to_words(remainder) : to_concat);
     }
     if( numero < 1000000000 ) { // millions
         unsigned int millions = static_cast<int>(numero/1000000);
@@ -48,6 +53,7 @@ bool is_number(const std::string& s){
     return !s.empty() && it == s.end();
 }
 int main(){
+        while(1){
         std::string numero;
         std::string test;
         std::cout << "Magbigay ng numero:";
@@ -57,4 +63,5 @@ int main(){
             int i = std::stoi (numero,&sz);
             std::cout << i << " = " << number_to_words(i) << std::endl;
         }
+    }
 }
